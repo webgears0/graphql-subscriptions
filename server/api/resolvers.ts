@@ -1,51 +1,11 @@
-interface BaseMutationRequest {
-  parent: string;
-  context: string;
-}
-
-interface CreatePostRequest {
-  input: CreatePostRequestInput
-}
-
-interface CreatePostRequestInput {
-  title: string;
-  content: string;
-}
-
-interface CreatePostResponse {
-  post: Post
-}
-
-type Post = {
-  title: string;
-  content: string;
-  createdAt: Date;
-  updatedAt?: Date;
-}
-
-function helloWorld() {
-  return 'Hello, World!';
-}
-
-function createNewPost({ input }: {
-  input: CreatePostRequestInput
-}) {
-  const { title: rawTitle, content: rawContent } = input;
-  const title = rawTitle.trim();
-  const content = rawContent.trim();
-
-  const post = {
-    title,
-    content,
-    createdAt: new Date(),
-  }
-
-  return { post };
-}
+import { createNewPost, fetchPosts } from '../services/posts.services.js';
+import { CreatePostRequest, CreatePostResponse } from '../types/posts.types.js';
 
 const resolvers = {
   Query: {
-    helloWorld,
+    posts(_parent: unknown, _args: unknown, _context: unknown) {
+      return fetchPosts();
+    },
   },
   Mutation: {
     createPost(_parent: unknown, args: CreatePostRequest, _context: unknown): CreatePostResponse {     
