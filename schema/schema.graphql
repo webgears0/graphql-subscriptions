@@ -4,24 +4,66 @@ type Query {
 
 type Mutation {
   createPost(input: CreatePostInput!): CreatePostPayload!
+
+  createComment(input: CreateCommentInput!): CreateCommentPayload!
 }
 
 type Subscription {
   postCount: Int
+
+  commentAdded(input: CommentAddedInput): Comment
 }
 
+"""
+Mutation Inputs
+"""
 input CreatePostInput {
   title: String!
   content: String!
 }
 
+input CreateCommentInput {
+  postId: String!
+  content: String!
+}
+
+"""
+Subscription Inputs
+"""
+input CommentAddedInput {
+  filter: CommentAddedFilterInput!
+}
+
+input CommentAddedFilterInput {
+  "Comment length to filter"
+  contentLength: Int!
+}
+
+"""
+Mutation Payloads
+"""
 type CreatePostPayload {
   post: Post!
 }
 
+type CreateCommentPayload {
+  comment: Comment!
+}
+
+"""
+Object Types
+"""
 type Post {
+  id: String!
   title: String!
   content: String!
   createdAt: String!
   updatedAt: String
+}
+
+type Comment {
+  id: String!
+  postId: String!
+  content: String!
+  createdAt: String!
 }
