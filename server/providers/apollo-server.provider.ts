@@ -1,10 +1,10 @@
-import { makeExecutableSchema } from '@graphql-tools/schema';
-import { createServer } from 'http';
-import express from 'express';
-import { WebSocketServer } from 'ws';
-import { useServer } from 'graphql-ws/lib/use/ws';
-import { ApolloServer } from 'apollo-server-express';
-import { ApolloServerPluginDrainHttpServer } from 'apollo-server-core';
+import { createServer } from "http";
+import express from "express";
+import { ApolloServer } from "apollo-server-express";
+import { ApolloServerPluginDrainHttpServer } from "apollo-server-core";
+import { makeExecutableSchema } from "@graphql-tools/schema";
+import { WebSocketServer } from "ws";
+import { useServer } from "graphql-ws/lib/use/ws";
 
 import resolvers from '../api/resolvers';
 import typeDefs from '../api/type-defs';
@@ -46,7 +46,10 @@ export async function runServer(port: number) {
 
   httpServer.listen(port, () => {
     console.log(
-      `Server is running on http://localhost:${port}${server.graphqlPath}`
+      `Query endpoint is running on http://localhost:${port}${server.graphqlPath}`
+    );
+    console.log(
+      `Subscription endpoint is running on ws://localhost:${port}${server.graphqlPath}`
     );
   });
 }

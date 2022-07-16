@@ -6,6 +6,10 @@ type Mutation {
   createPost(input: CreatePostInput!): CreatePostPayload!
 }
 
+type Subscription {
+  postCount: Int
+}
+
 input CreatePostInput {
   title: String!
   content: String!

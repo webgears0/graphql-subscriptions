@@ -1,5 +1,5 @@
 export interface CreatePostRequest {
-  input: CreatePostRequestInput
+  input: CreatePostRequestInput;
 }
 
 export interface CreatePostRequestInput {
@@ -8,7 +8,7 @@ export interface CreatePostRequestInput {
 }
 
 export interface CreatePostResponse {
-  post: Post
+  post: Post;
 }
 
 export type Post = {
